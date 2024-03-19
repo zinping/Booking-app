@@ -12,26 +12,26 @@ router.post("/login",
         check("password", "Password with 6 or more characters are required").isLength({ min: 6, }),
     ], async (req: Request, res: Response) => {
         const errors = validationResult(req)
-        if (!errors.isEmpty()) return res.send(400).json({ message: errors.array() })
+        if (!errors.isEmpty()) { return res.status(400).json({ message: errors.array() }) }
 
-        const [email, passord] = req.body;
+        const {email, passord}= req.body;
 
         try {
 
             const user = await User.findOne({ email });
-            if (!user) return res.status(500).json({ message: "Invalid Credentials" });
+            if (!user) { return res.status(500).json({ message: "Invalid Credentials" }); }
             const isMatch = await bcrypt.compare(passord, user.password)
-            if (!isMatch) return res.status(500).json({ message: "Invalid Credentials" });
+            if (!isMatch) { return res.status(500).json({ message: "Invalid Credentials" }); }
 
-            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY as string,{ expiresIn: "1d"});
+            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY as string, { expiresIn: "1d" });
 
-            res.cookie("auth token", token, { 
+            res.cookie("auth token", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 maxAge: 864000000,
-             })
+            });
 
-            res.status(400).json({userId: user._id})
+            res.status(200).json({ userId: user._id });
 
 
         } catch (error) {
@@ -39,3 +39,5 @@ router.post("/login",
             res.status(500).json({ message: "something went wrong" });
         }
     });
+
+export default router;
