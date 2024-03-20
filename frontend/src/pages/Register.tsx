@@ -13,7 +13,7 @@ export type RegisterFormData = {
 
  const Register = () => {
     
-    const { register, watch, handleSubmit, formState:{errors} } = useForm<RegisterFormData>();
+    const { register, watch, handleSubmit, formState:{errors}, } = useForm<RegisterFormData>();
 
     const mutation = useMutation(apiClient.register, {
         onSuccess: () => {
