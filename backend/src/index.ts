@@ -4,6 +4,7 @@ import "dotenv/config";
 import mongoose from "mongoose";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import cookieParser from "cookie-parser"
 
 mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
     .then(() => {
@@ -17,10 +18,11 @@ const app = express();
 
 // Apply CORS middleware
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
 }));
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
