@@ -15,7 +15,7 @@ const Header = () => {
             <>
               <Link to="my-booking">My Bookings</Link>
               <Link to="my-hotel">My hotels</Link>
-              <button>Sign out</button>
+              <SignOutButton />
             </>
           ) : (
             <Link
