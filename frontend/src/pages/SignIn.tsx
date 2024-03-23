@@ -66,7 +66,7 @@ const onSubmit = handleSubmit((data)=>{
       </label>
       <span className="flex justify-between items-center">
         <span className="text-sm">
-          Not Register? <Link to="/reigster" className="underline">Create an account here</Link>
+          Not Register? <Link to="/register" className="underline">Create an account here</Link>
         </span>
         <button
           type="submit"
