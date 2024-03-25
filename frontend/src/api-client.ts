@@ -1,7 +1,7 @@
 import { RegisterFormData } from "./pages/Register"
 import { SignInFormData } from "./pages/SignIn";
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+// import { HotelType } from "../../backend/src/models/hotel"
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:7000";
 
 console.log(API_BASE_URL)
 export const register = async (formData: RegisterFormData) => {

@@ -4,7 +4,6 @@ import User from "../models/user";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { verifyToken } from "../middleware/auth";
-// import verifyToken from "../middleware/auth";
 
 const router = express.Router();
 

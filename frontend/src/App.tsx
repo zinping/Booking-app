@@ -7,7 +7,7 @@ import AddHotel from "./pages/AddHotel"
 
 const App = () => {
 
-  const { isLoggedIn } = useAppContext(); 
+  const { isLoggedIn } = useAppContext();
 
   return (
     <Router>
@@ -25,13 +25,18 @@ const App = () => {
           <SignIn />
         </Layout>} />
 
-        {isLoggedIn &&
+        {isLoggedIn && (
           <>
-            <Route path="/add-hotel" element={<Layout>
-              <AddHotel />
-            </Layout>} />
+            <Route
+              path="/add-hotel"
+              element={
+                <Layout>
+                  <AddHotel />
+                </Layout>
+              }
+            />
           </>
-        }
+        )}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
