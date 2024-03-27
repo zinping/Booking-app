@@ -5,7 +5,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "nodemon",
-    "build": "npm install && npm install typescript && npx tsc",
+    "build": "npm install && npm install typescript && npx tsc && npm i moongose",
     "start": "node ./dist/index.js",
     "e2e": "cross-env DOTENV_CONFIG_PATH=.env.e2e nodemon"
   },
@@ -24,7 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongobd": "^0.0.1-security.0",
     "mongodb": "^6.5.0",
-    "mongoose": "^8.2.2",
+    "mongoose": "^8.2.3",
     "moongose": "^1.0.0",
     "multer": "^1.4.5-lts.1",
     "typescript": "^5.4.3"
@@ -34,6 +34,7 @@
     "@types/cookie-parser": "^1.4.7",
     "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.11"
   }
 }
