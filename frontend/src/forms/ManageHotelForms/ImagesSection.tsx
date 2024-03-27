@@ -1,5 +1,5 @@
 import { useFormContext } from "react-hook-form"
-import { HotelFormData } from "./ManageHotelForms";
+import { HotelFormData } from "./ManageHotelForm";
 
 const ImagesSection = () => {
     const { register, formState: {errors} } = useFormContext<HotelFormData>();
