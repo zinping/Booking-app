@@ -10,12 +10,12 @@ import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
 import { useAppContext } from "./contexts/AppContext";
 import MyHotels from "./pages/MyHotels";
-import EditHotel from "./pages/EditHotels";
 import Search from "./pages/Search";
-import Detail from "./pages/Details";
 import Booking from "./pages/Booking";
 import MyBookings from "./pages/MyBookings";
 import Home from "./pages/Home";
+import Detail from "./pages/Details";
+import EditHotel from "./pages/EditHotels";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();

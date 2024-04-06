@@ -4,9 +4,7 @@ import { useQuery } from "react-query";
 import * as apiClient from "../api-client";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 
-const STRIPE_PUB_KEY =
-  import.meta.env.VITE_STRIPE_PUB_KEY ||
-  "pk_test_51P2FNBSEmN97YIOyY0bO8t7rISjacXbsLt4bg7SgH1NbugHIOqAY0Rz9MgPFB3N1kIdcBEP5Jwm19drKMmIhaPrW00gUTztKBS";
+const STRIPE_PUB_KEY = import.meta.env.VITE_STRIPE_PUB_KEY || "pk_test_51P2FNBSEmN97YIOyY0bO8t7rISjacXbsLt4bg7SgH1NbugHIOqAY0Rz9MgPFB3N1kIdcBEP5Jwm19drKMmIhaPrW00gUTztKBS";
 
 type ToastMessage = {
   message: string;
@@ -34,15 +32,13 @@ export const AppContextProvider = ({
     retry: false,
   });
 
-  const isLoggedIn = !isError;
-
   return (
     <AppContext.Provider
       value={{
         showToast: (toastMessage) => {
           setToast(toastMessage);
         },
-        isLoggedIn,
+        isLoggedIn: !isError,
         stripePromise,
       }}
     >

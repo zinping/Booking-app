@@ -3,7 +3,7 @@ import Hotel from "../models/hotel";
 import { BookingType, HotelSearchResponse } from "../shared/types";
 import { param, validationResult } from "express-validator";
 import Stripe from "stripe";
-import {verifyToken} from "../middleware/auth";
+import verifyToken from "../middleware/auth";
 
 const stripe = new Stripe(process.env.STRIPE_API_KEY as string);
 

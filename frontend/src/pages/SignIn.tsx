@@ -2,42 +2,45 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export type SignInFormData = {
-    email: string;
-    password: string;
-}
+  email: string;
+  password: string;
+};
 
 const SignIn = () => {
+  const { showToast } = useAppContext();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
-const { showToast} = useAppContext();
-const location = useLocation();
-const navigate = useNavigate();
-    const { register, handleSubmit, formState: {errors}, } = useForm<SignInFormData>();
 
-    const mutation = useMutation(apiClient.signIn, {
-        onSuccess: async () => {
-            showToast({message: "Login Successful", type:"SUCCESS"})
-            await queryClient.invalidateQueries("validateToken");
-            navigate( location.state?.from?.pathname || "/")
-        },
+  const location = useLocation();
 
-        onError: async(error: Error) => {
-          showToast({message:error.message, type:"ERROR"})
-        }
-    })
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<SignInFormData>();
 
-const onSubmit = handleSubmit((data)=>{
-    mutation.mutate(data)
-})
+  const mutation = useMutation(apiClient.signIn, {
+    onSuccess: async () => {
+      showToast({ message: "Sign in Successful!", type: "SUCCESS" });
+      await queryClient.invalidateQueries("validateToken");
+      navigate(location.state?.from?.pathname || "/");
+    },
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
+    },
+  });
+
+  const onSubmit = handleSubmit((data) => {
+    mutation.mutate(data);
+  });
 
   return (
     <form className="flex flex-col gap-5" onSubmit={onSubmit}>
-        <h2 className="text-3xl font-bold">Sign In</h2>
-
-        <label className="text-gray-700 text-sm font-bold flex-1">
+      <h2 className="text-3xl font-bold">Sign In</h2>
+      <label className="text-gray-700 text-sm font-bold flex-1">
         Email
         <input
           type="email"
@@ -65,9 +68,12 @@ const onSubmit = handleSubmit((data)=>{
           <span className="text-red-500">{errors.password.message}</span>
         )}
       </label>
-      <span className="flex justify-between items-center">
+      <span className="flex items-center justify-between">
         <span className="text-sm">
-          Not Register? <Link to="/register" className="underline">Create an account here</Link>
+          Not Registered?{" "}
+          <Link className="underline" to="/register">
+            Create an account here
+          </Link>
         </span>
         <button
           type="submit"
@@ -77,7 +83,7 @@ const onSubmit = handleSubmit((data)=>{
         </button>
       </span>
     </form>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
